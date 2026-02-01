@@ -124,7 +124,7 @@ const ContactSection = () => {
                             <div className="mt-8 pt-6 border-t border-white/10">
                                 <div className="flex items-center gap-4 text-white/80">
                                     <Phone className="text-dhaba-amber shrink-0" />
-                                    <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-dhaba-orange to-dhaba-amber">7083147336</p>
+                                    <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-dhaba-orange to-dhaba-amber">8788365960</p>
                                 </div>
                             </div>
                         </div>
