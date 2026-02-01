@@ -8,7 +8,9 @@ const greetings = [
 ];
 
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
-    const [percent, setPercent] = useState(0);
+    // Determine target percentage for smooth filling
+    // We'll animate this value from 0 to 100
+    const [progress, setProgress] = useState(0);
     const [textIndex, setTextIndex] = useState(0);
 
     useEffect(() => {
@@ -21,32 +23,30 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
     }, []);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setPercent((curr) => {
-                if (curr >= 100) {
-                    clearInterval(interval);
-                    return 100;
-                }
-                return curr + Math.floor(Math.random() * 5) + 2;
-            });
+        // Start the progress animation
+        const timer = setTimeout(() => {
+            setProgress(100);
         }, 100);
 
-        return () => clearInterval(interval);
+        return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
-        if (percent >= 100) {
-            setTimeout(() => {
+        if (progress === 100) {
+            // Wait for animation to finish (approx 3s) plus a small buffer
+            const completeTimer = setTimeout(() => {
                 onComplete();
-            }, 800);
+            }, 3500); // 3s duration + 0.5s buffer
+            return () => clearTimeout(completeTimer);
         }
-    }, [percent, onComplete]);
+    }, [progress, onComplete]);
 
-    const getLoadingText = (p: number) => {
-        if (p < 30) return "Arranging the Tables...";
-        if (p < 60) return "Polishing the Glasses...";
-        if (p < 90) return "Heating the Tandoor...";
-        return "Serving Authentic Varhadi Taste...";
+    const getLoadingText = () => {
+        // Since we don't have real-time access to the exact animated value in JS state without layout shifts,
+        // we can estimate or just keep the text static/pulsing. 
+        // However, for visual consistency with the bar, we can use the time.
+        // Or simpler: just cycle the text independently which is what we are likely doing.
+        return "Preparing Authentic Experience...";
     };
 
     return (
@@ -83,18 +83,20 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 
             {/* Minimal Progress Bar */}
             <div className="relative z-20 w-64 md:w-96 mt-8">
-                {/* Text Indicators - Fade in active stage */}
+                {/* Text Indicators - Fade in active stage with delays to match bar animation */}
                 <div className="flex justify-between w-full mb-3 px-1">
-                    <span className={`text-[10px] uppercase tracking-widest transition-colors duration-500 ${percent >= 30 ? "text-dhaba-orange font-bold drop-shadow-[0_0_8px_rgba(255,165,0,0.8)]" : "text-white/20"}`}>Tables</span>
-                    <span className={`text-[10px] uppercase tracking-widest transition-colors duration-500 ${percent >= 60 ? "text-dhaba-orange font-bold drop-shadow-[0_0_8px_rgba(255,165,0,0.8)]" : "text-white/20"}`}>Glasses</span>
-                    <span className={`text-[10px] uppercase tracking-widest transition-colors duration-500 ${percent >= 90 ? "text-dhaba-orange font-bold drop-shadow-[0_0_8px_rgba(255,165,0,0.8)]" : "text-white/20"}`}>Food</span>
+                    <IndicatorText label="Tables" delay={0.5} />
+                    <IndicatorText label="Glasses" delay={1.5} />
+                    <IndicatorText label="Food" delay={2.5} />
                 </div>
 
                 {/* Track */}
-                <div className="h-[2px] w-full bg-white/10 rounded-full overflow-hidden">
+                <div className="h-[2px] w-full bg-white/10 rounded-full overflow-hidden relative">
                     <motion.div
                         className="h-full bg-gradient-to-r from-transparent via-dhaba-orange to-dhaba-amber shadow-[0_0_20px_rgba(255,165,0,0.8)] relative"
-                        style={{ width: `${Math.min(percent, 100)}%` }}
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 3, ease: "linear" }}
                     >
                         {/* Glowing Head */}
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-dhaba-orange rounded-full blur-[4px] shadow-[0_0_15px_#ff9f1c]" />
@@ -108,10 +110,27 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ repeat: Infinity, duration: 2 }}
             >
-                {getLoadingText(percent)}
+                Serving Authentic Varhadi Taste...
             </motion.p>
         </motion.div>
     );
 };
+
+const IndicatorText = ({ label, delay }: { label: string, delay: number }) => {
+    return (
+        <motion.span
+            initial={{ color: "rgba(255,255,255,0.2)", textShadow: "none" }}
+            animate={{
+                color: "rgb(255, 165, 0)",
+                textShadow: "0 0 8px rgba(255, 165, 0, 0.8)",
+                fontWeight: "bold"
+            }}
+            transition={{ delay: delay, duration: 0.5 }}
+            className="text-[10px] uppercase tracking-widest"
+        >
+            {label}
+        </motion.span>
+    )
+}
 
 export default LoadingScreen;
