@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+const greetings = [
+    "पांजबराव वऱ्हाडी धाब्यावर आपले स्वागत आहे", // Marathi
+    "पांजबराव वऱ्हाडी धाबा में आपका स्वागत है",   // Hindi
+    "Welcome to Panjabrao Varhadi Dhaba" // English
+];
+
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
     const [percent, setPercent] = useState(0);
     const [textIndex, setTextIndex] = useState(0);
-
-    const greetings = [
-        "पांजबराव वऱ्हाडी धाब्यावर आपले स्वागत आहे", // Marathi
-        "पांजबराव वऱ्हाडी धाबा में आपका स्वागत है",   // Hindi
-        "Welcome to Panjabrao Varhadi Dhaba" // English
-    ];
 
     useEffect(() => {
         // Cycle text every 1200ms

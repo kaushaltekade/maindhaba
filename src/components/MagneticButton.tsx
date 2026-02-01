@@ -9,10 +9,11 @@ interface MagneticButtonProps {
 }
 
 const MagneticButton = ({ children, className = "", onClick, href }: MagneticButtonProps) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ref = useRef<any>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
-    const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouse = (e: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
         const { clientX, clientY } = e;
         const { height, width, left, top } = ref.current?.getBoundingClientRect() || { height: 0, width: 0, left: 0, top: 0 };
         const middleX = clientX - (left + width / 2);
@@ -35,9 +36,9 @@ const MagneticButton = ({ children, className = "", onClick, href }: MagneticBut
         </motion.div>
     );
 
-    const containerProps = {
+    const commonProps = {
         ref: ref,
-        onMouseMove: handleMouse as any,
+        onMouseMove: handleMouse,
         onMouseLeave: reset,
         onClick: onClick,
         className: `inline-block cursor-pointer ${className}`,
@@ -45,14 +46,14 @@ const MagneticButton = ({ children, className = "", onClick, href }: MagneticBut
 
     if (href) {
         return (
-            <a href={href} {...containerProps}>
+            <a href={href} {...commonProps}>
                 {content}
             </a>
         );
     }
 
     return (
-        <div {...containerProps}>
+        <div {...commonProps}>
             {content}
         </div>
     );
