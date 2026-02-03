@@ -28,7 +28,7 @@ const HeroSection = () => {
                 <Reveal width="100%" delay={0.2}>
                     <div className="flex justify-center mb-6">
                         <span className="inline-block py-1 px-3 border border-dhaba-orange/50 rounded-full bg-dhaba-orange/10 backdrop-blur-md text-dhaba-orange text-sm font-semibold tracking-widest uppercase mb-6">
-                            Est. 1985
+                            Est. 2007
                         </span>
                     </div>
                 </Reveal>
