@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const greetings = [
-    "पांजबराव वऱ्हाडी धाब्यावर आपले स्वागत आहे", // Marathi
-    "पांजबराव वऱ्हाडी धाबा में आपका स्वागत है",   // Hindi
+    "पंजाबराव वऱ्हाडी धाब्यावर आपले स्वागत आहे", // Marathi
+    "पंजाबराव वऱ्हाडी धाबा में आपका स्वागत है",   // Hindi
     "Welcome to Panjabrao Varhadi Dhaba" // English
 ];
 
