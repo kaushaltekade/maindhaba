@@ -1,7 +1,10 @@
+'use client';
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { X } from "lucide-react";
+import Image from "next/image";
 
 const InteractiveGallery = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -70,11 +73,13 @@ const InteractiveGallery = () => {
                                     transition={{ delay: index * 0.05 }}
                                     className="aspect-[4/3] rounded-lg overflow-hidden relative group"
                                 >
-                                    <img
+                                    <Image
                                         src={src}
                                         alt={`Gallery ${index}`}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        loading="lazy"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
+                                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                        quality={80}
                                     />
                                 </motion.div>
                             ))}
@@ -104,11 +109,13 @@ const InteractiveGallery = () => {
                             key={index}
                             className="relative h-[250px] w-[350px] md:h-[400px] md:w-[600px] shrink-0 rounded-2xl overflow-hidden shadow-2xl grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 hover:scale-105"
                         >
-                            <img
+                            <Image
                                 src={src}
                                 alt={`Gallery image ${index + 1}`}
-                                className="w-full h-full object-cover"
-                                loading="lazy"
+                                fill
+                                sizes="(max-width: 768px) 350px, 600px"
+                                className="object-cover"
+                                quality={80}
                             />
                         </div>
                     ))}

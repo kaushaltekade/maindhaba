@@ -1,4 +1,7 @@
+'use client';
+
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const AmbienceSection = () => {
     return (
@@ -45,10 +48,13 @@ const AmbienceSection = () => {
                             transition={{ duration: 0.8 }}
                             className="absolute top-0 right-0 w-4/5 h-3/5 rounded-2xl overflow-hidden shadow-2xl z-10"
                         >
-                            <img
+                            <Image
                                 src="/images/gallery/dhaba-ambience.webp"
                                 alt="Main Ambience"
-                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                                fill
+                                sizes="(max-width: 768px) 80vw, 50vw"
+                                className="object-cover hover:scale-110 transition-transform duration-700"
+                                quality={85}
                             />
                         </motion.div>
 
@@ -60,10 +66,13 @@ const AmbienceSection = () => {
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="absolute bottom-0 left-0 w-3/5 h-2/5 rounded-2xl overflow-hidden shadow-2xl border-4 border-dhaba-dark z-20"
                         >
-                            <img
+                            <Image
                                 src="/images/gallery/indoor-dining.webp"
                                 alt="Indoor Dining"
-                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                                fill
+                                sizes="(max-width: 768px) 60vw, 35vw"
+                                className="object-cover hover:scale-110 transition-transform duration-700"
+                                quality={85}
                             />
                         </motion.div>
 

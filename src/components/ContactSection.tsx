@@ -1,3 +1,5 @@
+'use client';
+
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Clock, Info, Instagram, Facebook, Mail, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";

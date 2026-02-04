@@ -1,7 +1,10 @@
+'use client';
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { Reveal } from "./Reveal";
 import MagneticButton from "./MagneticButton";
+import Image from "next/image";
 
 const HeroSection = () => {
     const { scrollY } = useScroll();
@@ -16,10 +19,14 @@ const HeroSection = () => {
                 className="absolute inset-0 z-0"
             >
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-dhaba-dark z-10" />
-                <img
+                <Image
                     src="/images/gallery/hero-dhaba.webp"
                     alt="Authentic Dhaba Atmosphere"
-                    className="w-full h-full object-cover scale-110" // scale-110 to avoid whitespace on parallax
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover scale-110"
+                    quality={90}
                 />
             </motion.div>
 
