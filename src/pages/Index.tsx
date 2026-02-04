@@ -5,10 +5,15 @@ import FeaturedMenu from "@/components/FeaturedMenu";
 import InteractiveGallery from "@/components/InteractiveGallery";
 import ContactSection from "@/components/ContactSection";
 import { Toaster } from "@/components/ui/toaster";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-dhaba-dark text-white selection:bg-dhaba-orange selection:text-white">
+      <SEO
+        title="Home"
+        description="Experience authentic Varhadi cuisine at Punjabrao Patil Dhaba. Best family restaurant in Paratwada and Amravati offering traditional Maharashtrian dishes."
+      />
       <Navbar />
       <HeroSection />
       <AmbienceSection />
